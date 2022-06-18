@@ -3,14 +3,14 @@ import { useState } from "react";
 
 function CreateArea(props){
 
-    const [note, setnote] = useState({
+    const [note, setNote] = useState({
         title:"",
         content:""
     })
 function handlechange(event){
 
     const {name,value}=event.target;
-    setnote(prviousnote=>{
+    setNote(prviousnote=>{
         return {
             ...prviousnote,
             [name]:value
@@ -19,9 +19,15 @@ function handlechange(event){
 }
 function submitnote(event){
     props.onadd(note)
+    setNote({
+        title:"",
+        content:""
+    })
+   
     event.preventDefault();
 
 }
+
     return(
         <di>
         <form>

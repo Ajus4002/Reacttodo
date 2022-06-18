@@ -7,20 +7,26 @@ import Note from "./components/note";
 
 
 function App() {
-const [notes, setnotes] = useState([]);
+const [notes, setNotes] = useState([]);
 
   function addNote(newnote){
-    setnotes(previousnote=>{
+    setNotes(previousnote=>{
       return [...previousnote,newnote]
     }
       )
 
   }
 
-  function deleteNote(id){
-    console.log('detjkfahkj');
-
+  function deleteNote(id) {
+    setNotes(previousnote => {
+      return previousnote.filter((noteItem, index) => {
+        return index !== id;
+      });
+    });
   }
+
+
+  
   return (
     <div className="App">
       <Nav />
@@ -28,11 +34,13 @@ const [notes, setnotes] = useState([]);
       onadd={addNote}
       />
 
-    {  notes.map((noteItems)=>
+    {  notes.map((noteItem,index)=>
        {
       return <Note
-title={noteItems.title}
-content={noteItems.content}
+      key={index}
+      id={index}
+title={noteItem.title}
+content={noteItem.content}
 onDelete={deleteNote}
       
       />})
